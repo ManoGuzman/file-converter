@@ -44,8 +44,8 @@ ERROR_MESSAGES = {
 VALID_EXTENSIONS = {".docx", ".doc"}
 
 # Default paths
-DEFAULT_DOCS_FOLDER = Path(r"C:\Software\Dev\scripts\convert_files\docs")
-DEFAULT_OUTPUT_FOLDER = Path(r"C:\Software\Dev\scripts\convert_files\md")
+DEFAULT_DOCS_FOLDER = Path(__file__).parent.parent / "docs"
+DEFAULT_OUTPUT_FOLDER = Path(__file__).parent.parent / "md"
 
 # Valid mode flags
 FILE_MODE_FLAGS = {"-f", "--file"}
