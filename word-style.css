@@ -1,0 +1,209 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* A4 page setup optimized for Kindle */
+@page {
+  size: A4 portrait;
+  margin: 1.5cm;
+}
+
+/* Base document setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Kumbh Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16pt;  
+  line-height: 1.7;
+  color: #000;
+  background: #fff;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings - minimum size 18pt */
+h1 {
+  font-size: 28pt;  /* Scaled down proportionally */
+  font-weight: bold;
+  margin-top: 18pt;
+  margin-bottom: 10pt;
+}
+
+h2 {
+  font-size: 24pt;
+  font-weight: bold;
+  margin-top: 14pt;
+  margin-bottom: 8pt;
+}
+
+h3 {
+  font-size: 20pt;
+  font-weight: bold;
+  margin-top: 12pt;
+  margin-bottom: 6pt;
+}
+
+h4, h5, h6 {
+  font-size: 18pt;
+  font-weight: bold;
+  margin-top: 10pt;
+  margin-bottom: 5pt;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 16pt;
+  text-align: left;
+  hyphens: none;
+  orphans: 3;
+  widows: 3;
+}
+
+/* Lists */
+ul, ol {
+  margin: 10pt 0;
+  padding-left: 30pt;  /* Reduced for screen space */
+}
+
+li {
+  margin-bottom: 5pt;
+  orphans: 2;
+  widows: 2;
+}
+
+/* Nested lists */
+ul ul, ol ol, ul ol, ol ul {
+  margin: 5pt 0;
+}
+
+/* Links */
+a {
+  color: #0563C1;
+  text-decoration: underline;
+}
+
+@media print {
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  
+  /* Only show URLs for external links, not for internal anchors */
+  a[href^="http"]:after,
+  a[href^="https"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #333;
+  }
+  
+  /* Hide anchor references for internal links */
+  a[href^="#"]:after {
+    content: none;
+  }
+}
+
+/* Emphasis */
+strong, b {
+  font-weight: bold;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Inline code - optimized for e-ink */
+code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13pt;
+  background-color: #fff;
+  border: 1pt solid #ccc;
+  padding: 2pt 4pt;
+  border-radius: 2pt;
+  line-height: 1.6;
+}
+
+/* Code blocks - with line wrapping for Kindle */
+pre {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12pt;
+  background-color: #fff;
+  border: 1pt solid #ccc;
+  padding: 10pt;
+  margin: 10pt 0;
+  border-radius: 3pt;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Quotes */
+blockquote {
+  margin: 10pt 0;
+  padding-left: 15pt;
+  border-left: 3pt solid #999;  /* Darker for better e-ink visibility */
+  color: #333;
+  font-style: italic;
+}
+
+/* Horizontal lines */
+hr {
+  border: none;
+  border-top: 1pt solid #999;  /* Darker for e-ink */
+  margin: 18pt 0;
+}
+
+/* Tables - optimized for small screens */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10pt 0;
+  font-size: 11pt;  /* Slightly smaller for better fit */
+}
+
+th, td {
+  border: 1pt solid #999;  /* Darker for e-ink */
+  padding: 8pt;
+  text-align: left;
+}
+
+th {
+  background-color: #fff;  /* Pure white for e-ink */
+  font-weight: bold;
+  border-bottom: 2pt solid #000;  /* Stronger header separation */
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10pt auto;
+}
+
+/* Page breaks */
+.page-break {
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Avoid page breaks inside these elements */
+h1, h2, h3, h4, h5, h6 {
+  break-after: avoid;
+  page-break-after: avoid;
+  border: none !important;
+}
+
+pre, blockquote, table {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
