@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file-converter"
+version = "0.1.0"
+description = "A file converter utility"
+authors = [{name = "Manuel Guzmán", email = "manuguzman8@gmail.com"}]
