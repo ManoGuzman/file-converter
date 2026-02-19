@@ -72,18 +72,18 @@ class TestValidationFunctions:
 
     def test_validate_file_not_empty(self):
         """Test validate_file_not_empty for empty and non-empty files."""
+        # Non-empty file should not raise
         with tempfile.NamedTemporaryFile(delete=False) as tmp:
             tmp.write(b"content")
+            tmp.flush()
             tmp_path = Path(tmp.name)
-            # Should not raise
             validate_file_not_empty(tmp_path)
-        os.unlink(tmp_path)
 
+        # Empty file should raise ValueError
         with tempfile.NamedTemporaryFile(delete=False) as tmp:
             tmp_path = Path(tmp.name)
-            with pytest.raises(ValueError):
-                validate_file_not_empty(tmp_path)
-        os.unlink(tmp_path)
+        with pytest.raises(ValueError):
+            validate_file_not_empty(tmp_path)
 
     def test_validate_file_has_extension(self):
         """Test validate_file_has_extension for correct and incorrect extensions."""
@@ -103,9 +103,10 @@ class TestValidationFunctions:
         """Test validate_pdf_input_file for valid and invalid PDF files."""
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
             tmp.write(b"dummy pdf content")
+            tmp.flush()  # Ensure content is written to disk
             tmp_path = Path(tmp.name)
-            result = validate_pdf_input_file(str(tmp_path))
-            assert result == tmp_path
+        result = validate_pdf_input_file(str(tmp_path))
+        assert result == tmp_path
         os.unlink(tmp_path)
 
         # Invalid extension
