@@ -20,6 +20,9 @@ def extract_text_from_pdf(pdf_file_path):
             if page_text:
                 text += page_text + "\n"
         return text
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
+        return ""
     except PdfReadError as e:
         print(f"PDF read error: {e}")
         return ""
