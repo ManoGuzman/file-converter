@@ -4,9 +4,11 @@ PDF to JSON Converter Script.
 
 import sys
 import json
-from pathlib import Path
-from PyPDF2 import PdfReader
-from PyPDF2.errors import PdfReadError
+import pathlib
+
+from pypdf import PdfReader
+from pypdf.errors import PdfReadError
+
 
 PDF_EXTENSION = ".pdf"
 JSON_EXTENSION = ".json"
@@ -45,7 +47,7 @@ def convert_pdf_to_json(pdf_file_path, json_file_path):
         print(f"I/O error: {e}")
 
 
-def validate_pdf_file(pdf_file: Path) -> Path:
+def validate_pdf_file(pdf_file: pathlib.Path) -> pathlib.Path:
     """Validate that the given path is a readable PDF file."""
     if not pdf_file.exists():
         raise FileNotFoundError(f"PDF file not found: {pdf_file}")
@@ -56,7 +58,7 @@ def validate_pdf_file(pdf_file: Path) -> Path:
     return pdf_file
 
 
-def validate_directory(directory: Path) -> Path:
+def validate_directory(directory: pathlib.Path) -> pathlib.Path:
     """Validate that the given path is a directory."""
     if not directory.exists():
         raise FileNotFoundError(f"Directory not found: {directory}")
@@ -67,8 +69,8 @@ def validate_directory(directory: Path) -> Path:
 
 def convert_single_pdf(pdf_path: str, json_dir: str):
     """Convert a single PDF file to JSON."""
-    pdf_file = validate_pdf_file(Path(pdf_path))
-    json_dir_path = Path(json_dir)
+    pdf_file = validate_pdf_file(pathlib.Path(pdf_path))
+    json_dir_path = pathlib.Path(json_dir)
     json_dir_path.mkdir(parents=True, exist_ok=True)
     json_file = json_dir_path / (pdf_file.stem + JSON_EXTENSION)
     convert_pdf_to_json(str(pdf_file), str(json_file))
@@ -77,8 +79,8 @@ def convert_single_pdf(pdf_path: str, json_dir: str):
 
 def convert_pdf_directory(pdf_dir: str, json_dir: str):
     """Convert all PDF files in a directory to JSON files."""
-    pdf_dir_path = validate_directory(Path(pdf_dir))
-    json_dir_path = Path(json_dir)
+    pdf_dir_path = validate_directory(pathlib.Path(pdf_dir))
+    json_dir_path = pathlib.Path(json_dir)
     json_dir_path.mkdir(parents=True, exist_ok=True)
     pdf_files = list(pdf_dir_path.glob(f"*{PDF_EXTENSION}"))
     if not pdf_files:
