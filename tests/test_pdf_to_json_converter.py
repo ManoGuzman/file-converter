@@ -7,7 +7,6 @@ import os
 import json
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.platypus import SimpleDocTemplate, Table
 from src.pdf_to_json_converter import (
     extract_text_from_pdf,
     convert_pdf_to_json,
