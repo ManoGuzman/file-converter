@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [master, feature-pdf-json]
   pull_request:
-    branches: [main, master]
+    branches: [master, feature-pdf-json]
 
 jobs:
   test:
