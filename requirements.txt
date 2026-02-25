@@ -17,5 +17,7 @@ python-docx>=1.1.0
 # Testing framework
 pytest>=7.0.0
 
+reportlab>=3.5.0
+
 # pip install -r requirements.txt
 # pip install --upgrade -r requirements.txt
