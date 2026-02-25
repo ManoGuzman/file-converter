@@ -5,6 +5,7 @@ PDF to JSON Converter Script.
 import sys
 import json
 import pathlib
+import pdfplumber
 
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
@@ -34,17 +35,36 @@ def extract_text_from_pdf(pdf_file_path):
         return ""
 
 
-def convert_pdf_to_json(pdf_file_path, json_file_path):
-    """Converts a PDF file to a JSON file containing the extracted text."""
+def extract_tables_from_pdf(pdf_file_path):
+    """Extract tables from a PDF file and return as a list of dicts."""
+    tables = []
     try:
-        text = extract_text_from_pdf(pdf_file_path)
-        data = {"text": text}
-        with open(json_file_path, "w", encoding="utf-8") as json_file:
-            json.dump(data, json_file, ensure_ascii=False, indent=4)
-    except FileNotFoundError as e:
-        print(f"File not found: {e}")
-    except IOError as e:
-        print(f"I/O error: {e}")
+        with pdfplumber.open(pdf_file_path) as pdf:
+            for page in pdf.pages:
+                page_tables = page.extract_tables()
+                for table in page_tables:
+                    # Assume first row is header
+                    headers = table[0]
+                    for row in table[1:]:
+                        row_dict = {headers[i]: row[i] for i in range(len(headers))}
+                        tables.append(row_dict)
+        return tables
+    except (
+        FileNotFoundError,
+        pdfplumber.pdfminer.pdfparser.PDFSyntaxError,
+        IOError,
+    ) as e:
+        print(f"Error extracting tables: {e}")
+        return []
+
+
+def convert_pdf_to_json(pdf_file_path, json_file_path):
+    """Converts a PDF file to a JSON file containing extracted text and tables."""
+    text = extract_text_from_pdf(pdf_file_path)
+    tables = extract_tables_from_pdf(pdf_file_path)
+    data = {"text": text, "tables": tables}
+    with open(json_file_path, "w", encoding="utf-8") as json_file:
+        json.dump(data, json_file, ensure_ascii=False, indent=4)
 
 
 def validate_pdf_file(pdf_file: pathlib.Path) -> pathlib.Path:
