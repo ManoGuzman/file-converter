@@ -7,3 +7,21 @@ name = "file-converter"
 version = "0.1.0"
 description = "A file converter utility"
 authors = [{name = "Manuel Guzmán", email = "manuguzman8@gmail.com"}]
+dependencies = [
+    "pdf2docx>=0.5.8",
+    "pypandoc>=1.6.4",
+    "pymupdf>=1.24.0",
+    "pdfplumber>=0.10.0",
+    "python-docx>=1.1.0",
+    "pytest>=7.0.0",
+    "reportlab>=4.0.0",
+    "pypdf>=4.0.0",
+    "pdf2image>=1.17.0",
+    "Pillow>=10.0.0"
+]
+
+# Install dependencies and your package in editable mode
+# pip install -e .
+
+# Run tests (if using pytest)
+# pytest

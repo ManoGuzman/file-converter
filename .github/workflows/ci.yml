@@ -1,10 +1,10 @@
-name: CI
+name: Python CI
 
 on:
   push:
-    branches: [master, feature-pdf-json]
+    branches: [master, feature-*]
   pull_request:
-    branches: [master, feature-pdf-json]
+    branches: [master]
 
 jobs:
   test:
@@ -19,6 +19,23 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -e .
       - name: Run tests
         run: pytest
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Build package
+        run: pip install build && python -m build
+
+      - name: Check package
+        run: pip install twine && python -m twine check dist/*
