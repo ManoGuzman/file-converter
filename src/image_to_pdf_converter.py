@@ -15,16 +15,14 @@ def get_image_paths(path):
     if os.path.isfile(path):
         if path.lower().endswith(IMAGE_EXTENSIONS):
             return [path]
-        else:
-            return []
-    elif os.path.isdir(path):
+        return []
+    if os.path.isdir(path):
         return [
             os.path.join(path, f)
             for f in os.listdir(path)
             if f.lower().endswith(IMAGE_EXTENSIONS)
         ]
-    else:
-        return []
+    return []
 
 
 # Function to convert images to PDF
