@@ -1,6 +1,6 @@
 {
   "markdown-pdf.styles": [
-    "styles/kindle-style.css"
+    "styles/word-style.css"
   ],
   "python.testing.pytestArgs": [
     "tests"
