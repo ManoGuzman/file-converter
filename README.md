@@ -1,143 +1,337 @@
-# File Converter &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ManoGuzman/file-converter/blob/master/LICENSE)
+<a id="readme-top"></a>
 
-<img src="https://img.icons8.com/?size=100&id=CoAutH1CZYoV&format=png&color=000000" alt="file converter" align="right" width="125" height="125">
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![project_license][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-> Simple and extensible file conversion utility for Windows
 
-A command-line Python tool to convert files between different formats (PDF to Word, Word to Markdown, etc.). Useful for quick document transformations and automation.
 
-## Installing / Getting started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/ManoGuzman/file-converter">
+    <img src="https://img.icons8.com/?size=100&id=CoAutH1CZYoV&format=png&color=000000" alt="Logo" width="80" height="80">
+  </a>
 
-Clone the repository and install dependencies:
+<h3 align="center">File Converter</h3>
 
-```shell
-git clone https://github.com/ManoGuzman/file-converter.git
-cd file-converter
+  <p align="center">
+    A Python CLI utility to convert documents and images between popular file formats — PDF, Word, Markdown, JSON, and images.
+    <br />
+    <a href="https://github.com/ManoGuzman/file-converter"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/ManoGuzman/file-converter/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/ManoGuzman/file-converter/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-python -m venv venv
-venv\Scripts\activate  # On Windows
 
-pip install -r requirements.txt
-```
 
-This will set up the project locally and install all required Python dependencies.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Usage
 
-Convert a PDF to Word:
 
-```shell
-python src/pdf_to_word_converter.py -f path/to/input.pdf
-```
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Convert all PDFs in the default folder:j
+`file-converter` is a command-line utility that converts documents and images between a variety of file formats. Each converter is a standalone Python script that supports both single-file and batch (directory) modes.
 
-```shell
-python src/pdf_to_word_converter.py -d
-```
+**Supported conversions:**
 
-Convert a Word document to Markdown:
+| Converter                   | Input                 | Output               |
+| --------------------------- | --------------------- | -------------------- |
+| `pdf_to_word_converter.py`  | PDF                   | DOCX (Word)          |
+| `word_to_md_converter.py`   | DOCX / DOC            | Markdown             |
+| `pdf_to_json_converter.py`  | PDF                   | JSON (text + tables) |
+| `image_to_pdf_converter.py` | PNG / JPG / BMP / GIF | PDF                  |
+| `pdf_to_image_converter.py` | PDF                   | PNG (one per page)   |
 
-```shell
-python src/word_to_md_converter.py -f path/to/input.docx
-```
+The project also ships two print-optimized CSS stylesheets (`styles/word-style.css` and `styles/kindle-style.css`) for use with the VS Code `markdown-pdf` extension, enabling a clean Markdown → PDF workflow.
 
-See each script's help or source for more options.
+**Default directory conventions** (relative to project root):
 
-## Developing
+| Directory | Purpose               |
+| --------- | --------------------- |
+| `pdf/`    | Input PDFs            |
+| `docs/`   | Output Word documents |
+| `md/`     | Output Markdown files |
+| `json/`   | Output JSON files     |
+| `img/`    | Input/output images   |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 ### Built With
 
-- Python 3.10+
-- [pdf2docx](https://pypi.org/project/pdf2docx/) for PDF to Word
-- [pypandoc](https://pypi.org/project/pypandoc/) for Word to Markdown
-- [pdfplumber](https://pypi.org/project/pdfplumber/) and [python-docx](https://pypi.org/project/python-docx/) for alternative PDF conversion
+* [![Python][Python.org]][Python-url]
+* [![pdf2docx][pdf2docx-badge]][pdf2docx-url]
+* [![pypandoc][pypandoc-badge]][pypandoc-url]
+* [![PyMuPDF][pymupdf-badge]][pymupdf-url]
+* [![pdfplumber][pdfplumber-badge]][pdfplumber-url]
+* [![python-docx][python-docx-badge]][python-docx-url]
+* [![pypdf][pypdf-badge]][pypdf-url]
+* [![pdf2image][pdf2image-badge]][pdf2image-url]
+* [![Pillow][pillow-badge]][pillow-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
 
 ### Prerequisites
 
-- [Python](https://www.python.org/) 3.10 or higher
-- [pip](https://pip.pypa.io/en/stable/)
-- (Optional) [pnpm](https://pnpm.io/) if you use Node.js tools for linting or formatting
+- **Python 3.10+** (uses `match`/`case` syntax)
+- **[Pandoc](https://pandoc.org/installing.html)** — required for `word_to_md_converter.py`
+- **[Poppler](https://poppler.freedesktop.org/)** — required for `pdf_to_image_converter.py`
 
-### Setting up Dev
+### Installation
 
-- Clone the repository:
+1. Clone the repository
+   ```sh
+   git clone https://github.com/ManoGuzman/file-converter.git
+   cd file-converter
+   ```
 
-```shell
-git clone https://github.com/ManoGuzman/file-converter.git
-cd file-converter
+2. Install the package and its dependencies
+   ```sh
+   pip install -e .
+   ```
+
+3. (Optional) Install dev dependencies for linting and packaging
+   ```sh
+   pip install ".[dev]"
+   ```
+
+4. Change git remote url to avoid accidental pushes to base project
+   ```sh
+   git remote set-url origin github_username/repo_name
+   git remote -v # confirm the changes
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+### PDF → Word (DOCX)
+
+```sh
+# Single file — output goes to docs/
+python src/pdf_to_word_converter.py -f "path/to/file.pdf"
+
+# Batch — all PDFs in pdf/ → docs/
+python src/pdf_to_word_converter.py -d
 ```
 
-- Create and activate a virtual environment:
+### Word → Markdown
 
-```shell
-python -m venv venv
-venv\Scripts\activate  # On Windows
+```sh
+# Single file
+python src/word_to_md_converter.py -f input.docx [output.md]
+
+# Batch folder (default: docs/ → md/)
+python src/word_to_md_converter.py -d [input_folder] [output_folder]
 ```
 
-- Install dependencies:
+### PDF → JSON
 
-```shell
-pip install -r requirements.txt
+```sh
+# Single file — output goes to json/
+python src/pdf_to_json_converter.py -f "path/to/file.pdf"
+
+# Batch — all PDFs in pdf/ → json/
+python src/pdf_to_json_converter.py -d
 ```
 
-- Run the scripts in the `src` folder with your files.
-
-No database or server setup is required.
-
-### Building
-
-No build step is required for this project. The scripts can be run directly with Python.
-
-### Deploying / Publishing
-
-To release a new version, tag your commit and push to the repository. If distributing via PyPI, use:
-
-```shell
-python setup.py sdist bdist_wheel
-pip install twine
-twine upload dist/*
+The JSON output has the shape:
+```json
+{
+  "text": "...",
+  "tables": [{"col1": "val1", "col2": "val2"}, ...]
+}
 ```
 
-## Versioning
+### Image → PDF
 
-This project uses [SemVer](http://semver.org/) for versioning. See the [tags on this repository](https://github.com/ManoGuzman/file-converter/tags) for available versions.
+```sh
+# Single image or folder of images — output goes to pdf/
+python src/image_to_pdf_converter.py -f "path/to/image_or_folder"
 
-## Configuration
+# Default: reads from img/, outputs to pdf/output.pdf
+python src/image_to_pdf_converter.py
+```
 
-You can configure the following options via CLI flags (see each script for details):
+Supported image formats: PNG, JPG, JPEG, BMP, GIF. Multiple images are combined into a single PDF.
 
-- `-f, --file`: Path to the input file.
-- `-d, --dir`: Path to the input directory.
-- Output paths and formats are script-dependent.
+### PDF → Images
 
-## Tests
+```sh
+# Single PDF — one PNG per page
+python src/pdf_to_image_converter.py -f "path/to/file.pdf" [-o output_folder]
 
-To run tests (if available):
+# Batch folder (default: pdf/ → img/)
+python src/pdf_to_image_converter.py -d [folder] [-o output_folder]
+```
 
-```shell
+### Running Tests
+
+```sh
 pytest
 ```
 
-Tests cover core conversion logic and CLI argument parsing.
+### Running Linter
 
-## Style guide
-
-- Follows [PEP8](https://peps.python.org/pep-0008/) code style.
-- To check style:
-
-```shell
-flake8 .
+```sh
+ruff check src/
 ```
 
-## API Reference
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This is a CLI tool. For programmatic usage, import the conversion functions from the scripts in `src/`.
 
-## Database
 
-No database is used in this project.
+<!-- ROADMAP -->
+## Roadmap
 
-## Licensing
+- [x] PDF to Word converter
+- [x] Word to Markdown converter
+- [x] PDF to JSON converter
+- [x] Image to PDF converter
+- [x] PDF to Image converter
+- [ ] CLI entry point / unified command (`file-converter convert ...`)
+- [ ] GUI or web interface
+- [ ] Additional format support (EPUB, HTML, XLSX)
 
-MIT License. See [LICENSE](./LICENSE) for details.
+See the [open issues](https://github.com/ManoGuzman/file-converter/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Top contributors:
+
+<a href="https://github.com/ManoGuzman/file-converter/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ManoGuzman/file-converter" alt="contrib.rocks image" />
+</a>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Manuel Guzmán - manuguzman8@gmail.com
+
+Project Link: [https://github.com/ManoGuzman/file-converter](https://github.com/ManoGuzman/file-converter)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [pdf2docx](https://github.com/dothinking/pdf2docx)
+* [pypandoc](https://github.com/JessicaTegner/pypandoc)
+* [pdfplumber](https://github.com/jsvine/pdfplumber)
+* [pdf2image](https://github.com/Belval/pdf2image)
+* [Pillow](https://python-pillow.org/)
+* [Pandoc](https://pandoc.org/)
+* [Poppler](https://poppler.freedesktop.org/)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ManoGuzman/file-converter.svg?style=for-the-badge
+[contributors-url]: https://github.com/ManoGuzman/file-converter/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ManoGuzman/file-converter.svg?style=for-the-badge
+[forks-url]: https://github.com/ManoGuzman/file-converter/network/members
+[stars-shield]: https://img.shields.io/github/stars/ManoGuzman/file-converter.svg?style=for-the-badge
+[stars-url]: https://github.com/ManoGuzman/file-converter/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ManoGuzman/file-converter.svg?style=for-the-badge
+[issues-url]: https://github.com/ManoGuzman/file-converter/issues
+[license-shield]: https://img.shields.io/github/license/ManoGuzman/file-converter.svg?style=for-the-badge
+[license-url]: https://github.com/ManoGuzman/file-converter/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/manuel-guzmán-b87b841bb
+[product-screenshot]: images/screenshot.png
+<!-- Shields.io badges -->
+[Python.org]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+[pdf2docx-badge]: https://img.shields.io/badge/pdf2docx-0.5.8+-blue?style=for-the-badge
+[pdf2docx-url]: https://github.com/dothinking/pdf2docx
+[pypandoc-badge]: https://img.shields.io/badge/pypandoc-1.6.4+-blue?style=for-the-badge
+[pypandoc-url]: https://github.com/JessicaTegner/pypandoc
+[pymupdf-badge]: https://img.shields.io/badge/PyMuPDF-1.24.0+-blue?style=for-the-badge
+[pymupdf-url]: https://pymupdf.readthedocs.io/
+[pdfplumber-badge]: https://img.shields.io/badge/pdfplumber-0.10.0+-blue?style=for-the-badge
+[pdfplumber-url]: https://github.com/jsvine/pdfplumber
+[python-docx-badge]: https://img.shields.io/badge/python--docx-1.1.0+-blue?style=for-the-badge
+[python-docx-url]: https://python-docx.readthedocs.io/
+[pypdf-badge]: https://img.shields.io/badge/pypdf-4.0.0+-blue?style=for-the-badge
+[pypdf-url]: https://github.com/py-pdf/pypdf
+[pdf2image-badge]: https://img.shields.io/badge/pdf2image-1.17.0+-blue?style=for-the-badge
+[pdf2image-url]: https://github.com/Belval/pdf2image
+[pillow-badge]: https://img.shields.io/badge/Pillow-10.0.0+-blue?style=for-the-badge
+[pillow-url]: https://python-pillow.org/
